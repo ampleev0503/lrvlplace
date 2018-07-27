@@ -17,10 +17,10 @@ Route::get('/', function () {
 
 Route::get('/places', 'PlacesController@index');
 
-Route::get('/places/create', 'PlacesController@getCreate');
-Route::post('/places/create', 'PlacesController@postCreate');
+Route::get('/places/create', 'PlacesController@CreatePlace');
+Route::post('/places/create', 'PlacesController@uploadFormCreatePlace');
 
 Route::get('places/{id}', 'PlacesController@show')->where('id', '[0-9]+');
 
-Route::get('/places/{id}/photos/add', 'PlacesController@getAddPhoto')->where('id', '[0-9]+');
-Route::post('/places/{id}/photos/add', 'PlacesController@postAddPhoto')->where('id', '[0-9]+');
+Route::get('/places/{id}/photos/add', 'PlacesController@AddPhoto')->where('id', '[0-9]+');
+Route::post('/places/{id}/photos/add', 'PlacesController@uploadFormAddPhoto')->where('id', '[0-9]+');

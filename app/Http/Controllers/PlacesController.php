@@ -18,30 +18,30 @@ class PlacesController extends Controller
         return view('places', ['places' => $places]);
     }
 
-    public function getCreate()
+    public function CreatePlace()
     {
         $types = Type::get();
 
-        return view('create', ['types' => $types]);
+        return view('create', compact('types'));
     }
 
-    public function postCreate(PlaceRequest $request)
+    public function uploadFormCreatePlace(PlaceRequest $request)
     {
         Place::create($request->all());
 
         return redirect('/places');
     }
 
-    public function getAddPhoto($id)
+    public function AddPhoto($id)
     {
         $place = Place::findOrFail($id);
 
-        $pictures = Picture::where('place_id', '=', $id)->orderBy('created_at', 'desc')->get();
+        $pictures = Picture::where('place_id', $id)->orderBy('created_at', 'desc')->get();
 
-        return view('addPhoto', ['place' => $place, 'pictures' => $pictures]);
+        return view('addPhoto', compact('place', 'pictures'));
     }
 
-    public function postAddPhoto(Request $request, $id)
+    public function uploadFormAddPhoto(Request $request, $id)
     {
         $path = $request->file('image')->store('images');
 
@@ -56,6 +56,6 @@ class PlacesController extends Controller
 
         $pictures = Picture::where('place_id', '=', $id)->orderBy('created_at', 'desc')->get();
 
-        return view('show', ['place' => $place, 'pictures' => $pictures]);
+        return view('show', compact('place', 'pictures'));
     }
 }

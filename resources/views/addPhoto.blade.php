@@ -1,20 +1,25 @@
-<a href="/places">На главную</a>
+@extends('master')
 
-<hr>
 
-<h2>{{$place->name}}</h2>
 
-<hr>
+@section('content')
 
-@foreach($pictures as $picture)
-    <img src="/storage/{{$picture->url}}" width="100" height="100">
-@endforeach
+    @include('breadCrumbs')
 
-<form action="/places/{{$place->id}}/photos/add" method="post" enctype="multipart/form-data">
-    @csrf
-    <input type="text" name="place_id" value="{{$place->name}}" disabled>
-    <input type="file" name="image">
+    <h2>{{$place->name}}</h2>
 
-    <input type="submit" value="Отправить">
+    <hr>
 
-</form>
+    @foreach($pictures as $picture)
+        <img src="/storage/{{$picture->url}}" width="100" height="100">
+    @endforeach
+
+    <form action="/places/{{$place->id}}/photos/add" method="post" enctype="multipart/form-data">
+        @csrf
+        <input type="text" name="place_id" value="{{$place->name}}" disabled>
+        <input type="file" name="image">
+
+        <input type="submit" value="Отправить">
+
+    </form>
+@endsection
