@@ -11,16 +11,26 @@
 |
 */
 
-Route::get('/', function () {
-    return redirect('/places');
+
+Route::get('/', 'PlacesController@index')->name('main');
+
+Route::group(['prefix' => 'places'], function () {
+
+    Route::get('', 'PlacesController@showAll')->name('showAllPlaces')->middleware('place');
+
+    Route::get('create', 'PlacesController@createPlace')->name('createPlace');
+    Route::post('create', 'PlacesController@uploadFormCreatePlace')->name('uploadFormCreatePlace');;
+
+    Route::get('{id}', 'PlacesController@show')->name('showPlace')->where('id', '[0-9]+');
+
+    Route::get('photos/add', 'PlacesController@addPhoto')->name('addPhoto')->middleware('place');
+    Route::post('photos/add', 'PlacesController@uploadFormAddPhoto')->name('uploadFormAddPhoto');
+
 });
 
-Route::get('/places', 'PlacesController@index');
 
-Route::get('/places/create', 'PlacesController@CreatePlace');
-Route::post('/places/create', 'PlacesController@uploadFormCreatePlace');
 
-Route::get('places/{id}', 'PlacesController@show')->where('id', '[0-9]+');
 
-Route::get('/places/{id}/photos/add', 'PlacesController@AddPhoto')->where('id', '[0-9]+');
-Route::post('/places/{id}/photos/add', 'PlacesController@uploadFormAddPhoto')->where('id', '[0-9]+');
+
+
+

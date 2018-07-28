@@ -7,7 +7,7 @@
 
     <h2>Создать место</h2>
 
-    <form action="/places/create" method="post">
+    <form action="{{route('uploadFormCreatePlace')}}" method="post">
         @csrf
         <input type="text" name="name" value="{{old('name')}}">
         <select name="type_id">

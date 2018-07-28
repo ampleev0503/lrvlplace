@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ImageRequest;
 use App\Http\Requests\PlaceRequest;
 use App\Models\Picture;
 use App\Models\Place;
@@ -13,12 +14,17 @@ class PlacesController extends Controller
 {
     public function index()
     {
+        return view('main');
+    }
+
+    public function showAll()
+    {
         $places = Place::join('types', 'places.type_id', '=', 'types.t_id')->get();
 
         return view('places', ['places' => $places]);
     }
 
-    public function CreatePlace()
+    public function createPlace()
     {
         $types = Type::get();
 
@@ -29,25 +35,25 @@ class PlacesController extends Controller
     {
         Place::create($request->all());
 
-        return redirect('/places');
+        return redirect(route('showAllPlaces'));
     }
 
-    public function AddPhoto($id)
+    public function addPhoto()
     {
-        $place = Place::findOrFail($id);
+        $places = Place::get();
 
-        $pictures = Picture::where('place_id', $id)->orderBy('created_at', 'desc')->get();
-
-        return view('addPhoto', compact('place', 'pictures'));
+        return view('addPhoto', compact('places'));
     }
 
-    public function uploadFormAddPhoto(Request $request, $id)
+    public function uploadFormAddPhoto(ImageRequest $request)
     {
         $path = $request->file('image')->store('images');
 
-        Picture::create(['place_id' => $id, 'url' => $path]);
+        $placeId = $request->place_id;
 
-        return redirect('/places');
+        Picture::create(['place_id' => $placeId, 'url' => $path]);
+
+        return redirect(route('showPlace', $placeId));//('/places/' . $placeId);
     }
 
     public function show($id)
