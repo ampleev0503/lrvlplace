@@ -12,7 +12,7 @@
         @foreach($places as $place)
             <tr>
                 <td><a href="{{route('showPlace', $place->id)}}">{{$place->name}}</a></td>
-                <td>{{$place->t_name}}</td>
+                <td>{{$place->type->name}}</td>
             </tr>
         @endforeach
     </table>

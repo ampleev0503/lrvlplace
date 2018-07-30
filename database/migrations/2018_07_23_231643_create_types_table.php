@@ -14,8 +14,8 @@ class CreateTypesTable extends Migration
     public function up()
     {
         Schema::create('types', function (Blueprint $table) {
-            $table->increments('t_id');
-            $table->string('t_name');
+            $table->increments('id');
+            $table->string('name');
         });
 
         (new TypesSeeder())->run();

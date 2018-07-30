@@ -19,9 +19,9 @@ class PlacesController extends Controller
 
     public function showAll()
     {
-        $places = Place::join('types', 'places.type_id', '=', 'types.t_id')->get();
+        $places = Place::with('type')->get();
 
-        return view('places', ['places' => $places]);
+        return view('places', compact('places'));
     }
 
     public function createPlace()
@@ -60,8 +60,8 @@ class PlacesController extends Controller
     {
         $place = Place::findOrFail($id);
 
-        $pictures = Picture::where('place_id', '=', $id)->orderBy('created_at', 'desc')->get();
+        $pictures = Place::findOrFail($id)->pictures;
 
-        return view('show', compact('place', 'pictures'));
+        return view('show', compact('place','pictures'));
     }
 }

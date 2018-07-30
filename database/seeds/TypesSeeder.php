@@ -12,8 +12,8 @@ class TypesSeeder extends Seeder
     public function run()
     {
         DB::table('types')->insert([
-            ['t_name' => 'Страна'],
-            ['t_name' => 'Город']
+            ['name' => 'Страна'],
+            ['name' => 'Город']
         ]);
     }
 }

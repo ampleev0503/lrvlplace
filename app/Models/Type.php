@@ -6,5 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Type extends Model
 {
-    protected $primaryKey = 't_id';
+
+    public function places()
+    {
+        return $this->hasMany(Place::class);
+    }
+
 }
