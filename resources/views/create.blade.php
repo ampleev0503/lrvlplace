@@ -12,10 +12,10 @@
         <input type="text" name="name" value="{{old('name')}}">
         <select name="type_id">
             @foreach($types as $type)
-                @if (old('type_id') == $type->t_id)
-                    <option value="{{$type->t_id}}" selected>{{$type->t_name}}</option>
+                @if (old('type_id') == $type->id)
+                    <option value="{{$type->id}}" selected>{{$type->name}}</option>
                 @else
-                    <option value="{{$type->t_id}}">{{$type->t_name}}</option>
+                    <option value="{{$type->id}}">{{$type->name}}</option>
                 @endif
             @endforeach
         </select>
