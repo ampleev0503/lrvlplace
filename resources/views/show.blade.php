@@ -10,6 +10,7 @@
     <hr>
 
     @foreach($pictures as $picture)
-        <img src="/storage/{{$picture->url}}" width="100" height="100">
+        {{--<img src="/storage/{{$picture->url}}" width="100" height="100">--}}
+        <img src="{{\Illuminate\Support\Facades\Storage::url($picture->url)}}" width="100" height="100">
     @endforeach
 @endsection

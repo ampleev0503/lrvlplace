@@ -23,8 +23,8 @@ Route::group(['prefix' => 'places'], function () {
 
     Route::get('{id}', 'PlacesController@show')->name('showPlace')->where('id', '[0-9]+');
 
-    Route::get('photos/add', 'PlacesController@addPhoto')->name('addPhoto')->middleware('place');
-    Route::post('photos/add', 'PlacesController@uploadFormAddPhoto')->name('uploadFormAddPhoto');
+    Route::get('photos/add', 'PhotosController@addPhoto')->name('addPhoto')->middleware('place');
+    Route::post('photos/add', 'PhotosController@uploadFormAddPhoto')->name('uploadFormAddPhoto');
 
 });
 
