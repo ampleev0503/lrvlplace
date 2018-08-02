@@ -7,7 +7,7 @@ use App\Http\Requests\PlaceRequest;
 use App\Models\Place;
 use App\Models\Type;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+
 
 class PlacesController extends Controller
 {
